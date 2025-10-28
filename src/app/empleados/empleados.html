@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <div *ngIf="mensaje" class="alert alert-success">
+  {{ mensaje }}
+</div>
+
+  <!-- Formulario para agregar empleado -->
+  <form #empleadoForm="ngForm" (ngSubmit)="agregarEmpleado(empleadoForm)">
+  <input type="text" name="nombre" [(ngModel)]="nuevoEmpleado.nombre" placeholder="Nombre" required>
+  <input type="text" name="apellido" [(ngModel)]="nuevoEmpleado.apellido" placeholder="Apellido" required>
+  <input type="email" name="correo" [(ngModel)]="nuevoEmpleado.correo" placeholder="Correo" required>
+  <input type="number" name="salario" [(ngModel)]="nuevoEmpleado.salario" placeholder="Salario" required>
+  <button type="submit" [disabled]="empleadoForm.invalid">Agregar</button>
+</form>
+
+  <!-- Tabla de empleados -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Salario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of empleados">
+        <td>{{ e.nombre }}</td>
+        <td>{{ e.apellido }}</td>
+        <td>{{ e.correo }}</td>
+        <td>{{ e.salario }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
