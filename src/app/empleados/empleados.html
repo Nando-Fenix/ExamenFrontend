@@ -1,35 +1,58 @@
-<div class="container mt-4">
-    <div *ngIf="mensaje" class="alert alert-success">
-  {{ mensaje }}
-</div>
+<div class="container mt-5">
+
+  <!-- Mensaje de alerta -->
+  <div *ngIf="mensaje" class="alert alert-success text-center">
+    {{ mensaje }}
+  </div>
 
   <!-- Formulario para agregar empleado -->
-  <form #empleadoForm="ngForm" (ngSubmit)="agregarEmpleado(empleadoForm)">
-  <input type="text" name="nombre" [(ngModel)]="nuevoEmpleado.nombre" placeholder="Nombre" required>
-  <input type="text" name="apellido" [(ngModel)]="nuevoEmpleado.apellido" placeholder="Apellido" required>
-  <input type="email" name="correo" [(ngModel)]="nuevoEmpleado.correo" placeholder="Correo" required>
-  <input type="number" name="salario" [(ngModel)]="nuevoEmpleado.salario" placeholder="Salario" required>
-  <button type="submit" [disabled]="empleadoForm.invalid">Agregar</button>
-</form>
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Agregar Nuevo Empleado</h5>
+    </div>
+    <div class="card-body">
+      <form #empleadoForm="ngForm" (ngSubmit)="agregarEmpleado(empleadoForm)" class="row g-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="nombre" [(ngModel)]="nuevoEmpleado.nombre" placeholder="Nombre" required>
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="apellido" [(ngModel)]="nuevoEmpleado.apellido" placeholder="Apellido" required>
+        </div>
+        <div class="col-md-6">
+          <input type="email" class="form-control" name="correo" [(ngModel)]="nuevoEmpleado.correo" placeholder="Correo" required>
+        </div>
+        <div class="col-md-6">
+          <input type="number" class="form-control" name="salario" [(ngModel)]="nuevoEmpleado.salario" placeholder="Salario" required>
+        </div>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-success" [disabled]="empleadoForm.invalid">
+            Agregar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Tabla de empleados -->
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Correo</th>
-        <th>Salario</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let e of empleados">
-        <td>{{ e.nombre }}</td>
-        <td>{{ e.apellido }}</td>
-        <td>{{ e.correo }}</td>
-        <td>{{ e.salario }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive shadow-sm">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo</th>
+          <th>Salario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of empleados">
+          <td>{{ e.nombre }}</td>
+          <td>{{ e.apellido }}</td>
+          <td>{{ e.correo }}</td>
+          <td>{{ e.salario | currency:'USD':'symbol' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>
